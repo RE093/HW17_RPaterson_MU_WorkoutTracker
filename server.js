@@ -36,6 +36,15 @@ app.get("/api/workouts", (req, res) => {
         });
 });
 
+app.post("/api/workouts", (req, res) => {
+    console.log(req.body);
+})
+
+app.put("/api/workouts/:id", (req, res) => {
+    // console.log(req.params.id);
+    // console.log(req.body);
+})
+
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
 });

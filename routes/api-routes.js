@@ -13,40 +13,29 @@ module.exports = app => {
     });
     
     app.post("/api/workouts", (req, res) => {
-        db.Workout.find({})
-            .then(exerciseData => {
-                res.send(exerciseData);
-            })
-            .catch(err => {
-                res.send(err);
-            })
+        db.Workout.create({
+            day: new Date(),
+            exercise: []
+         })
+         .then(data => {
+             res.json(data);
+         })
     })
 
-    // PUT route for adding/updating the exercise in the workout collection
     app.put('/api/workouts/:id', async (req, res) => {
         const id = req.params.id;
         const data = req.body;
         
-        db.Workout.findById(id)
-        .then(dbWorkout => {
-            dbWorkout.exercises.push(data);
-            return dbWorkout;
-        })
-        .then(dbWorkout => {
-            db.Workout.findOneAndUpdate(
+        db.Workout.findOneAndUpdate(
             { _id: id },
-            { exercises: dbWorkout.exercises },
+            { exercises: data },
             { new: true }
-            )
-            .then(dbWorkout => {
-                res.json(dbWorkout);
-            })
-            .catch(err => {
-                res.json(err);
-            });
+        )
+        .then(dbWorkout => {
+            res.json(dbWorkout);
         })
         .catch(err => {
             res.json(err);
-        });
+        })
     });
 }

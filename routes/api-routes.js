@@ -15,24 +15,22 @@ module.exports = app => {
     app.post("/api/workouts", (req, res) => {
         db.Workout.create({
             day: new Date(),
-            exercise: []
+            exercises: []
          })
          .then(data => {
              res.json(data);
          })
     })
 
-    app.put('/api/workouts/:id', async (req, res) => {
+    app.put('/api/workouts/:id', (req, res) => {
         const id = req.params.id;
         const data = req.body;
-        
-        db.Workout.findOneAndUpdate(
-            { _id: id },
-            { exercises: data },
-            { new: true }
-        )
-        .then(dbWorkout => {
-            res.json(dbWorkout);
+        console.log(id)
+        console.log(typeof(data))
+
+        db.Workout.update({ _id: id }, {$push: { exercises: data }})
+        .then(exerciseData => {
+            res.json(exerciseData)
         })
         .catch(err => {
             res.json(err);

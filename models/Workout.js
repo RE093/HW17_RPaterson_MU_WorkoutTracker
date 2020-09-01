@@ -5,49 +5,31 @@ const Schema = mongoose.Schema;
 let resistance = true;
 let cardio = false;
 
-const exerciseSchema = new mongoose.Schema;
+let exerciseSchema;
 
 if (resistance) {
-  exerciseSchema.add({
+  exerciseSchema = {
     type: String,
     name: String,
     duration: Number,
     weight: Number,
     reps: Number,
     sets: Number
-  });
+  };
 } else if (cardio) {
-  exerciseSchema.add({
+  exerciseSchema = {
     type: String,
     name: String,
     duration: Number,
     distance: Number
-  })
+  }
 }
-
-// const resistanceSchema = new mongoose.Schema({
-//   type: String,
-//   name: String,
-//   duration: Number,
-//   weight: Number,
-//   reps: Number,
-//   sets: Number,
-// });
-
-// const cardioSchema = new mongoose.Schema({
-//   type: String,
-//   name: String,
-//   duration: Number,
-//   distance: Number,
-// });
 
 const WorkoutSchema = new Schema({
   day: Date,
   exercises: 
     [ 
       exerciseSchema
-      // resistanceSchema,
-      // cardioSchema
     ]
 });
 

@@ -18,7 +18,7 @@ module.exports = app => {
                 res.send(exerciseData);
             })
             .catch(err => {
-                res.json(err);
+                res.send(err);
             })
     })
 

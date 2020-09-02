@@ -10,14 +10,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", 
+// Two connections required to connect mongoDB using mongoose to our local Robo 3T database
+// or the online atlas mongoDB database with Heroku.
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/workout", 
 { 
   useNewUrlParser: true,
-  // useUnifiedTopology: true,
-  // useCreateIndex: true,
-  // useFindAndModify: false
-});
-const db = require("./models");
+}
+);
 
 require("./routes/api-routes.js")(app);
 require("./routes/html-routes.js")(app);

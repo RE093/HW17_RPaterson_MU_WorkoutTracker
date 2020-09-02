@@ -1,5 +1,4 @@
 const db = require("../models");
-console.log(db)
 
 // Getting all the workouts, aids the Last Workout render on the first page
 module.exports = app => {
@@ -17,9 +16,8 @@ module.exports = app => {
     app.post("/api/workouts", (req, res) => {
         db.Workout.create({
             day: new Date(),
-            exercises: [],
-            totalDuration: 0
-         })
+            exercises: []
+        })
          .then(newWorkout => {
              res.json(newWorkout);
          })
@@ -52,32 +50,17 @@ module.exports = app => {
             }
         }
 
-        // This is where the update occurs, then the same workout is found again and the totalDuration is taken from it, 
-        // the duration of the new workout is then added to it for the new Total workoutDuration.
+        // This is where the update occurs.
         db.Workout.updateOne ({ _id: id }, { $push: { exercises: exerciseData }})
         .then(result => {
-            db.Workout.findOne ({ _id: id }, (err, data) => {
-                if (err) {
-                    res.json(err)
-                }
-                else {
-                    let currentDuration = data.totalDuration
-                    db.Workout.updateOne({ _id: id }, { $set: { totalDuration: (exerciseData.duration + currentDuration)}}, (err, success) => {
-                        if (err) {
-                            res.json(err)
-                        }
-                        else {
-                            console.log(success)
-                            res.json(success)
-                        }
-                    })
-
-                }
-            })
+            res.json(result);
+        })
+        .catch(err => {
+            res.json(err);
         })
     });
 
-    // This finds all the data required to render the graphs when you go to the "stats" page.
+    // This finds all the data required to render the graphs when you go to the "stats"
     app.get("/api/workouts/range", (req, res) => {
         db.Workout.find({})
         .then(workoutData => {

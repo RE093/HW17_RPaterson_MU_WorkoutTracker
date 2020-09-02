@@ -1,6 +1,6 @@
   <br>
   <div align="center">
-  <a href="https://github.com/RE093"><img style="width: 128px; height: 128px;" src="./assets/RE.png" alt="RE"></a>
+  <a href="https://github.com/RE093"><img style="width: 64px; height: 64px;" src="./assets/RE.png" alt="RE"></a>
   </div>
 </h1>
 

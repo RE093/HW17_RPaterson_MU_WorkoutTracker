@@ -31,8 +31,8 @@ module.exports = app => {
             exData = {
                 type: body.type,
                 name: body.name,
-                distance: body.distance,
-                duration: body.duration 
+                duration: body.duration,
+                distance: body.distance
             }
         }   
 
@@ -40,10 +40,10 @@ module.exports = app => {
             exData = {
                 type: body.type,
                 name: body.name,
+                duration: body.duration,
                 weight: body.weight,
-                sets: body.sets,
                 reps: body.reps,
-                duration: body.duration
+                sets: body.sets
             }
         }
 
@@ -57,4 +57,14 @@ module.exports = app => {
             }
         })
     });
+
+    app.get("/api/workouts/range", (req, res) => {
+        db.Workout.find({})
+        .then(workoutData => {
+            res.json(workoutData)
+        })
+        .catch(err => {
+            res.json(err)
+        })
+    })
 }

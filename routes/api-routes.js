@@ -4,8 +4,8 @@ console.log(db)
 module.exports = app => {
     app.get("/api/workouts", (req, res) => {
         db.Workout.find({})
-            .then(workdb => {
-                res.json(workdb);
+            .then(workoutData => {
+                res.json(workoutData);
             })
             .catch(err => {
                 res.json(err);
@@ -15,20 +15,21 @@ module.exports = app => {
     app.post("/api/workouts", (req, res) => {
         db.Workout.create({
             day: new Date(),
-            exercises: []
+            exercises: [],
+            totalDuration: 0
          })
-         .then(data => {
-             res.json(data);
+         .then(newWorkout => {
+             res.json(newWorkout);
          })
     })
 
     app.put('/api/workouts/:id', (req, res) => {
         const id = req.params.id;
         const body = req.body;
-        let exData;
+        let exerciseData;
 
         if (body.type === "cardio") {
-            exData = {
+            exerciseData = {
                 type: body.type,
                 name: body.name,
                 duration: body.duration,
@@ -37,7 +38,7 @@ module.exports = app => {
         }   
 
         if (body.type === "resistance") {
-            exData = {
+            exerciseData = {
                 type: body.type,
                 name: body.name,
                 duration: body.duration,
@@ -47,14 +48,26 @@ module.exports = app => {
             }
         }
 
-        db.Workout.updateOne ({ _id: id }, { $push: { exercises: exData }}, (err, success) => {
-            if (err) {
-                res.json(err)
-            }
-            else {
-                console.log(success)
-                res.json(success)
-            }
+        db.Workout.updateOne ({ _id: id }, { $push: { exercises: exerciseData }})
+        .then(result => {
+            db.Workout.findOne ({ _id: id }, (err, data) => {
+                if (err) {
+                    res.json(err)
+                }
+                else {
+                    let currentDuration = data.totalDuration
+                    db.Workout.updateOne({ _id: id }, { $set: { totalDuration: (exerciseData.duration + currentDuration)}}, (err, success) => {
+                        if (err) {
+                            res.json(err)
+                        }
+                        else {
+                            console.log(success)
+                            res.json(success)
+                        }
+                    })
+
+                }
+            })
         })
     });
 

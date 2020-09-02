@@ -1,5 +1,5 @@
 const db = require("../models");
-console.log(db.Workout)
+console.log(db)
 
 module.exports = app => {
     app.get("/api/workouts", (req, res) => {
@@ -24,16 +24,37 @@ module.exports = app => {
 
     app.put('/api/workouts/:id', (req, res) => {
         const id = req.params.id;
-        const data = req.body;
-        console.log(id)
-        console.log(typeof(data))
+        const body = req.body;
+        let exData;
 
-        db.Workout.update({ _id: id }, {$push: { exercises: data }})
-        .then(exerciseData => {
-            res.json(exerciseData)
-        })
-        .catch(err => {
-            res.json(err);
+        if (body.type === "cardio") {
+            exData = {
+                type: body.type,
+                name: body.name,
+                distance: body.distance,
+                duration: body.duration 
+            }
+        }   
+
+        if (body.type === "resistance") {
+            exData = {
+                type: body.type,
+                name: body.name,
+                weight: body.weight,
+                sets: body.sets,
+                reps: body.reps,
+                duration: body.duration
+            }
+        }
+
+        db.Workout.updateOne ({ _id: id }, { $push: { exercises: exData }}, (err, success) => {
+            if (err) {
+                res.json(err)
+            }
+            else {
+                console.log(success)
+                res.json(success)
+            }
         })
     });
 }

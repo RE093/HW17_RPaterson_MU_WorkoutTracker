@@ -62,7 +62,7 @@ This web app is  using an MIT license
 
 ## Version
 
-![Version Badge](https://img.shields.io/badge/license-1.0-red)
+![Version Badge](https://img.shields.io/badge/version-1.0-red)
 
 ## Contributing
 

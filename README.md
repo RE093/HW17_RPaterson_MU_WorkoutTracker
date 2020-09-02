@@ -54,7 +54,7 @@ n/a
 
 ## Usage
 
-View the app here: <a href="https://fierce-eyrie-07168.herokuapp.com/"></a>
+View the app <a href="https://fierce-eyrie-07168.herokuapp.com/">Here</a>
 
 ## License
 

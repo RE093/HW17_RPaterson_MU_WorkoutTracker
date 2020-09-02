@@ -1,6 +1,6 @@
   <br>
   <div align="center">
-  <a href="https://github.com/RE093"><img style="width: 64px; height: 64px;" src="./assets/RE.png" alt="RE"></a>
+  <a href="https://github.com/RE093"><img src="./assets/RE.png" height="128" width="128" alt="RE"></a>
   </div>
 </h1>
 
@@ -9,25 +9,25 @@
 <p align="center">
     <a href="#">
     <img src="https://img.shields.io/github/languages/count/RE093/HW17_RPaterson_MU_WorkoutTracker"
-         alt="#">
+         alt="languages used">
     <a href="#">
     <img src="https://img.shields.io/github/languages/top/RE093/HW17_RPaterson_MU_WorkoutTracker"
-         alt="">
-    <a href="">
+         alt="top language">
+    <a href="#">
     <img src="https://img.shields.io/badge/license-mit-blue"
-         alt="">
-    <a href="">
+         alt="licence MIT">
+    <a href="#">
     <img src="https://img.shields.io/badge/version-1.0-red"
-         alt="">
-        <a href="">
+         alt="version 1">
+        <a href="#">
     <img src="https://img.shields.io/github/last-commit/RE093/HW17_RPaterson_MU_WorkoutTracker"
-         alt="">
-        <a href="">
+         alt="last commit">
+        <a href="#">
     <img src="https://img.shields.io/github/issues-raw/RE093/HW17_RPaterson_MU_WorkoutTracker"
-         alt="">
-        <a href="">
+         alt="current issues">
+        <a href="#">
     <img src="https://img.shields.io/github/repo-size/RE093/HW17_RPaterson_MU_WorkoutTracker"
-         alt="">
+         alt="repo size">
 </p>
       
 <p align="center">
